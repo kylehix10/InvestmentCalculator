@@ -2,32 +2,29 @@
 //Copyright 2025
 public class RehabCalc {
     private int squareFootage;
-    private int bedrooms;
     private int bathrooms;
     private int kitchen;
     private int airconditioning;
     private int roof;
+    private int paint;
     private int floors;
-    private int misc5K;
-    private int misc10K;
-    private int misc15K;
-    private int misc20K;
+    private int miscCosts;
 
-    public RehabCalc(int squareFootage, int bedrooms, int bathrooms, int kitchen, int airconditioning,
-    int roof, int floors, int misc5K, int misc10K, int misc15K, int misc20K) {
+
+    public RehabCalc(int squareFootage, int bathrooms, int kitchen, int airconditioning,
+    int roof, int paint, int floors, int miscCosts) {
         this.squareFootage = squareFootage;
-        this.bedrooms = bedrooms;
         this.bathrooms = bathrooms;
         this.kitchen = kitchen;
         this.airconditioning = airconditioning;
         this.roof = roof;
+        this.paint = paint;
         this.floors = floors;
-        this.misc5K = misc5K;
-        this.misc10K = misc10K;
-        this.misc15K = misc15K;
-        this.misc20K = misc20K;
+        this.miscCosts = miscCosts;
+        
     }
 
+    //SquareFootage
     public int getSquareFootage() {
         return squareFootage;
     }
@@ -36,14 +33,7 @@ public class RehabCalc {
         this.squareFootage = squareFootage;
     }
 
-    public int getBedrooms() {
-        return bedrooms;
-    }
-
-    public void setBedrooms(int bedrooms) {
-        this.bedrooms = bedrooms;
-    }
-
+    //Bathrooms
     public int getBathrooms() {
         return bathrooms;
     }
@@ -52,6 +42,12 @@ public class RehabCalc {
         this.bathrooms = bathrooms;
     }
 
+    public double getBathroomCost() {
+        double bathroomCost = bathrooms * 5000;
+        return bathroomCost;
+    }
+
+    //Kitchen
     public int getKitchen() {
         return kitchen;
     }
@@ -60,6 +56,12 @@ public class RehabCalc {
         this.kitchen = kitchen;
     }
 
+    public double getKitchenCost() {
+        double kitchenCost = kitchen * squareFootage *10;
+        return kitchenCost;
+    }
+
+    //Airconditioning
     public int getAirconditioning() {
         return airconditioning;
     }
@@ -68,6 +70,12 @@ public class RehabCalc {
         this.airconditioning = airconditioning;
     }
 
+    public double getAirconditioningCost() {
+        double airconditioningCost = airconditioning * 7000;
+        return airconditioningCost;
+    }
+
+    //Roof
     public int getRoof() {
         return roof;
     }
@@ -76,6 +84,26 @@ public class RehabCalc {
         this.roof = roof;
     }
 
+    public double getRoofCost() {
+        double roofCost = roof *8000;
+        return roofCost;
+    }
+
+    //Paint
+    public int getPaint() {
+        return paint;
+    }
+
+    public void setPaint(int paint) {
+        this.paint = paint;
+    }   
+
+    public double getPaintCost() {
+        double paintCost = paint * squareFootage * 3.5;
+        return paintCost;
+    }
+
+    //Floors
     public int getFloors() {
         return floors;
     }
@@ -84,40 +112,37 @@ public class RehabCalc {
         this.floors = floors;
     }
 
-    public int getMisc5K() {
-        return misc5K;
+    public double getFloorCost() {
+        double floorCost = floors * squareFootage * 5;
+        return floorCost;
     }
 
-    public void setMisc5K(int misc5K) {
-        this.misc5K = misc5K;
+    //MiscCosts
+    public int getMiscCosts() {
+        return miscCosts;
     }
 
-    public int getMisc10K() {
-        return misc10K;
+    public void setMiscCosts(int miscCosts) {
+        this.miscCosts = miscCosts;
     }
 
-    public void setMisc10K(int misc10K) {
-        this.misc10K = misc10K;
+    public double getMiscCost() {
+        double miscCost = miscCosts *5000;
+        return miscCost;
     }
 
-    public int getMisc15K() {
-        return misc15K;
-    }
-
-    public void setMisc15K(int misc15K) {
-        this.misc15K = misc15K;
-    }
-
-    public int getMisc20K() {
-        return misc20K;
-    }
-
-    public void setMisc20K(int misc20K) {
-        this.misc20K = misc20K;
-    }
-
-    public int calcRehabCost() {
-        return 9;
+    //Calculate Rehab Costs
+    public double calcRehabCost() {
+        RehabCalc calc = new RehabCalc(squareFootage, bathrooms, kitchen, airconditioning, roof, paint, floors, miscCosts);
+        double bathroomCost = calc.getBathroomCost();
+        double kitchenCost = calc.getKitchenCost();
+        double airconditioningCost = calc.getAirconditioningCost();
+        double roofCost = calc.getRoofCost();
+        double paintCost = calc.getPaintCost();
+        double floorCost = calc.getFloorCost();
+        double miscCost = calc.getMiscCost();
+        double rehabCosts = bathroomCost + kitchenCost + airconditioningCost + roofCost + paintCost + floorCost + miscCost;
+        return rehabCosts;
     }
 
 }

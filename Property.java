@@ -6,15 +6,23 @@ public class Property {
     private String city;
     private String state;
     private int zip;
+    private int squareFootage;
+    private int bedrooms;
+    private int bathrooms;  
 
-    public Property(String name, String address, String city, String state, int zip) {
+    public Property(String name, String address, String city,
+    String state, int zip, int squareFootage, int bedrooms, int bathrooms) {
         this.name = name;
         this.address = address;
         this.city = city;
         this.state = state;
         this.zip = zip;
+        this.squareFootage = squareFootage;
+        this.bedrooms = bedrooms;
+        this.bathrooms = bathrooms;
     }
 
+    //Getters and Setters
     public String getName() {
         return name;
     }
@@ -58,6 +66,42 @@ public class Property {
           this.zip = 0;
     }
 
+    public int getSquareFootage() {
+        return squareFootage;
+    }
 
+    public void setSquareFootage(int squareFootage) {
+        this.squareFootage = squareFootage;
+    }
+
+    public int getBedrooms() {
+        return bedrooms;
+    }
+
+    public void setBedrooms(int bedrooms) {
+        this.bedrooms = bedrooms;
+    }
+
+    public int getBathrooms() {
+        return bathrooms;
+    }
+
+    public void setBathrooms(int bathrooms) {
+        this.bathrooms = bathrooms;
+    }
+    //End of getters and setters
+
+    public String toString() {
+        return "Property{" +
+                "name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", zip=" + zip +
+                ", squareFootage=" + squareFootage +
+                ", bedrooms=" + bedrooms +
+                ", bathrooms=" + bathrooms +
+                '}';
+    }
 
 }
