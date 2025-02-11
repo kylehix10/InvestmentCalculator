@@ -16,6 +16,7 @@ public class OfferProfitCalc {
     private double offerAndRehavLTV;
     private double hedge;
     private double offerLTV;
+    private double profitExpected;
 
     
 
@@ -25,7 +26,7 @@ public class OfferProfitCalc {
         this.offer = 0;
         this.rehabCost = rehabCost;
         this.holdingMonths = holdingMonths;
-        this.acquisitionCost = 0;
+        this.acquisitionCost = OfferProfitCalc.this.calcAcquisitionCost();
         this.holdingPerMonthExpense = 0;
         this.agentPercentage = 0;
         this.profit=0;
@@ -33,6 +34,7 @@ public class OfferProfitCalc {
         this.offerAndRehavLTV = 0;
         this.offerLTV = 0;
         this.hedge=0;
+        this.profitExpected=0;
     }
 
     public double getAfterRepairValue() {
@@ -58,7 +60,7 @@ public class OfferProfitCalc {
 
     public double calcOffer()
     {
-        offer = afterRepairValue - acquisitionCost - hedge - (holdingPerMonthExpense * holdingMonths)-agentPercentage - profit;
+        offer = afterRepairValue - acquisitionCost - hedge - (holdingPerMonthExpense * holdingMonths)-agentPercentage - profitExpected;
         return offer;
     }
 
@@ -88,7 +90,7 @@ public class OfferProfitCalc {
 
     public double calcAcquisitionCost()
     {
-        acquisitionCost = (offer * 0.03) + (.03 * rehabCost)+3000;
+        acquisitionCost = (profitExpected * 0.03) + (.03 * rehabCost)+3000;
         return acquisitionCost;
     }
 
@@ -190,20 +192,28 @@ public class OfferProfitCalc {
         return offerLTV;
     }
 
-    public String toString()
-    {
-        return "After Repair Value: " + afterRepairValue + "\nOffer: " + offer + "\nRehab Cost: " + rehabCost + "\nHolding Months: " + holdingMonths
-        + "\nAcquisition Cost: " + acquisitionCost + "\nHolding Per Month Expense: " + holdingPerMonthExpense + "\nAgent Percentage: " + agentPercentage
-        + "\nProfit: " + profit + "\nPercent of ARV: " + percentOfARV + "\nOffer and Rehab LTV: " + offerAndRehavLTV + "\nHedge: " + hedge + "\nOffer LTV: " + offerLTV;
+    public double getProfitExpected(){
+       return this.profitExpected;
     }
 
-    
+    public void setProfitExpected(double profitExpected){
+        this.profitExpected = profitExpected;
+    }
 
 
-    
+    public String toString(){
+        return "OfferCalc\nARV: "+ afterRepairValue +
+            "\nAcquisition Cost: "+ acquisitionCost +
+            "\nRepair Cost: "+ rehabCost +
+            "\nHedge 10% "+ hedge +
+            "\nHolding Per Month Expense "+ holdingPerMonthExpense +
+            "\nHolding Months "+ holdingMonths +
+            "\nAgent Percentage "+ agentPercentage+
+            "\n\n"+
+            "\nOffer "+ offer +
+            "\npercent of ARV "+ percentOfARV +
+            "\nOffer and Rehab LTV "+ offerAndRehavLTV + 
+            "\nOffer LTV "+ offerLTV;
 
-  
-
-
-    
+    }
 }
