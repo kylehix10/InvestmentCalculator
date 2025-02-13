@@ -1,34 +1,40 @@
 //Kyle Hix
 //Copyright 2025
-public class Calculator {
-    protected double afterRepairValue;
-    protected double offer;
-    protected double rehabCost;
-    protected double holdingMonths;
-    protected double acquisitionCost;
-    protected double holdingPerMonthExpense;
-    protected double agentPercentage;
-    protected double profit;
-    protected double percentOfARV;
-    protected double offerAndRehavLTV;
-    protected double offerLTV;
-    protected double hedge;
-    protected double profitExpected;
 
-    public Calculator() {
-        this.afterRepairValue = 0;
+//TODO Add variables and Setters
+
+public class OfferProfitCalc {
+    private double afterRepairValue;
+    private double offer;
+    private double rehabCost;
+    private double holdingMonths;
+    private double acquisitionCost;
+    private double holdingPerMonthExpense;
+    private double agentPercentage;
+    private double profit;
+    private double percentOfARV;
+    private double offerAndRehavLTV;
+    private double hedge;
+    private double offerLTV;
+    private double profitExpected;
+
+    
+
+    public OfferProfitCalc(double afterRepairValue,  double rehabCost, double holdingMonths)
+    {
+        this.afterRepairValue = afterRepairValue;
         this.offer = 0;
-        this.rehabCost = 0;
-        this.holdingMonths = 0;
-        this.acquisitionCost = 0;
+        this.rehabCost = rehabCost;
+        this.holdingMonths = holdingMonths;
+        this.acquisitionCost = OfferProfitCalc.this.calcAcquisitionCost();
         this.holdingPerMonthExpense = 0;
         this.agentPercentage = 0;
-        this.profit = 0;
+        this.profit=0;
         this.percentOfARV = 0;
         this.offerAndRehavLTV = 0;
         this.offerLTV = 0;
-        this.hedge = 0;
-        this.profitExpected = 0;
+        this.hedge=0;
+        this.profitExpected=0;
     }
 
     public double getAfterRepairValue() {
@@ -36,7 +42,12 @@ public class Calculator {
     }
 
     public void setAfterRepairValue(double afterRepairValue) {
-        this.afterRepairValue = afterRepairValue;
+        if(afterRepairValue < 0)
+        {
+            throw new IllegalArgumentException("After Repair Value must be greater than 0");
+        }
+        else
+            this.afterRepairValue = afterRepairValue;
     }
 
     public double getOffer() {
@@ -110,6 +121,7 @@ public class Calculator {
         agentPercentage = (afterRepairValue * 0.025);
         return agentPercentage;
     }
+
     public double getProfit() {
         return profit;
     }
@@ -124,6 +136,7 @@ public class Calculator {
         - agentPercentage - offer;
         return profit;
     }
+
     public double getPercentOfARV() {
         return percentOfARV;
     }
@@ -152,25 +165,12 @@ public class Calculator {
         return offerAndRehavLTV;
     }
 
-    public double getOfferLTV() {
-        return offerLTV;
-    }
-
-    public void setOfferLTV(double offerLTV) {
-        this.offerLTV = offerLTV;
-    }
-
-    public double calcOfferLTV(){
-        offerLTV = (offer/afterRepairValue)*100;
-        return offerLTV;
-    }
-    
     public double getHedge() {
         return hedge;
-    }
+    }   
 
-    public void setHedge(double hedge) {
-        this.hedge = hedge;
+    public double setHedge(double hedge) {
+        return this.hedge = hedge;
     }
 
     public double calcHedge()
@@ -178,16 +178,42 @@ public class Calculator {
         hedge = (afterRepairValue * 0.1);
         return hedge;
     }
-    public double getProfitExpected() {
-        return profitExpected;
+
+    public double getOfferLTV() {
+        return offerLTV;
+    }
+    
+    public double setOfferLTV(double offerLTV) {
+        return this.offerLTV = offerLTV;
     }
 
-    public void setProfitExpected(double profitExpected) {
+    public double calcOfferLTV(){
+        offerLTV = (offer/afterRepairValue)*100;
+        return offerLTV;
+    }
+
+    public double getProfitExpected(){
+       return this.profitExpected;
+    }
+
+    public void setProfitExpected(double profitExpected){
         this.profitExpected = profitExpected;
     }
 
 
+    public String toString(){
+        return "OfferCalc\nARV: "+ afterRepairValue +
+            "\nAcquisition Cost: "+ acquisitionCost +
+            "\nRepair Cost: "+ rehabCost +
+            "\nHedge 10% "+ hedge +
+            "\nHolding Per Month Expense "+ holdingPerMonthExpense +
+            "\nHolding Months "+ holdingMonths +
+            "\nAgent Percentage "+ agentPercentage+
+            "\n\n"+
+            "\nOffer "+ offer +
+            "\npercent of ARV "+ percentOfARV +
+            "\nOffer and Rehab LTV "+ offerAndRehavLTV + 
+            "\nOffer LTV "+ offerLTV;
 
-
-
+    }
 }

@@ -11,6 +11,11 @@ public class Property {
     private int squareFootage;
     private int bedrooms;
     private int bathrooms;  
+    private int kichen;
+    private int airconditioning;
+    private int paint;  
+    private int floors;
+    private int roof;
     private UUID uuid;
     private double rehabCost;
     private RehabCalc rehabCalc;
